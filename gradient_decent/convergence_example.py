@@ -2,15 +2,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Setup dummy data
-X = np.array([1, 2, 3, 4, 5])
-y = np.array([5, 7, 9, 11, 13]) # y = 2x + 3
+X = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+y = np.array([5.1, 6.9, 9.2, 11.3, 12.9, 15.0, 17.1, 18.78, 21.02, 23.01]) # y = 2x + 3, some noise added
 
 # Initialize parameters 
 w = 0.0
 b = 0.0
 m = len(X)
-learning_rate = 0.02
-epsilon = 0.0000001 # convergence treshold
+learning_rate = 0.005
+epsilon = 0.0001 # convergence treshold
 max_iter = 1000
 cost_history = []
 
@@ -33,5 +33,25 @@ for i in range(max_iter):
         print(f"Converged at iteration {i}.")
         break
 
-print(f"w: {w}")
-print(f"b: {b}")
+print(f"w: {w:.3}")
+print(f"b: {b:.3}")
+
+
+plt.figure(figsize=(12, 5))
+plt.subplot(1, 2, 1)
+plt.plot(range(len(cost_history)), cost_history, color='red', linewidth=2)
+plt.title("Learning Curve: Cost vs. Iterations")
+plt.xlabel("Step Number")
+plt.ylabel("Cost J(w,b)")
+plt.yscale('log') # to better observe the convergence
+plt.grid(True, alpha=0.3)
+
+# Plot 2: The Final Prediction Line
+plt.subplot(1, 2, 2)
+plt.scatter(X, y, color='blue', label='Data Points')
+plt.plot(X, w*X + b, color='green', label=f'Final Fit: {w:.2f}x + {b:.2f}')
+plt.title("Final Model Fit")
+plt.legend()
+
+plt.tight_layout()
+plt.show()
