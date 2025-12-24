@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 # the sigmoid function
 def sigmoid(z):
-    return 1 / (1 * np.exp(-z))
+    return 1 / (1 + np.exp(-z))
 
 # synthetic data: 2 features (e.g., exam 1 score, exam 2 score)
 # classes: fail (0), pass (1)
@@ -43,3 +43,26 @@ print(f"Final weights: {w}")
 print(f"Final bias: {b}")
 
 
+# Create a range of values for the x1 axis
+x1_values = np.linspace(0, 4, 100)
+
+# Calculate corresponding x2 values for the decision boundary
+# w[0] is w1, w[1] is w2
+x2_values = -(w[0] * x1_values + b) / w[1]
+
+plt.figure(figsize=(8, 6))
+
+# Plot the data points
+plt.scatter(X[y==0, 0], X[y==0, 1], color='red', label='Fail (0)', marker='x')
+plt.scatter(X[y==1, 0], X[y==1, 1], color='blue', label='Pass (1)', marker='o')
+
+# Plot the Decision Boundary
+plt.plot(x1_values, x2_values, color='black', label='Decision Boundary')
+
+plt.title("Logistic Regression: Decision Boundary")
+plt.xlabel("Exam 1 Score")
+plt.ylabel("Exam 2 Score")
+plt.ylim(0, 5) # Keep the view consistent
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()
