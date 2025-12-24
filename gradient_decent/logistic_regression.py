@@ -23,8 +23,6 @@ for i in range(iterations):
     # model: sigmoid(wx + b)
     z = np.dot(X, w) + b
     y_pred = sigmoid(z)
-    print(f"type(z): {type(z)}")
-    print(f"z.shape: {z.shape}")
 
     # cost(log loss)
     # add a tiny 1e-15 to avoid log(0) which causes 'nan'
